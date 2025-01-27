@@ -24,13 +24,13 @@ export class ProductService {
     return this.httpClient.get<Product>(productUrl);
   }
 
-  getProductListPaginate(thePage: number, 
-                         thePageSize: number, 
-                         theCategoryId: number): Observable<GetResponseProducts> {
+  getProductListPaginate(thePage: number,
+    thePageSize: number,
+    theCategoryId: number): Observable<GetResponseProducts> {
 
     // need to build URL based on category id, page and size 
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`
-                    + `&page=${thePage}&size=${thePageSize}`;
+      + `&page=${thePage}&size=${thePageSize}`;
 
     return this.httpClient.get<GetResponseProducts>(searchUrl);
   }
@@ -52,14 +52,14 @@ export class ProductService {
     return this.getProducts(searchUrl);
   }
 
-  searchProductsPaginate(thePage: number, 
-                        thePageSize: number, 
-                        theKeyword: string): Observable<GetResponseProducts> {
+  searchProductsPaginate(thePage: number,
+    thePageSize: number,
+    theKeyword: string): Observable<GetResponseProducts> {
 
     // need to build URL based on keyword, page and size 
     const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${theKeyword}`
-                    + `&page=${thePage}&size=${thePageSize}`;
-    
+      + `&page=${thePage}&size=${thePageSize}`;
+
     return this.httpClient.get<GetResponseProducts>(searchUrl);
   }
 
