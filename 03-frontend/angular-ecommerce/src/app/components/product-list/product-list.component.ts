@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/common/product';
 import { ActivatedRoute } from '@angular/router';
+import { timeoutWith } from 'rxjs/operators';
+import { CartItem } from 'src/app/common/cart-item';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-product-list',
@@ -20,9 +23,10 @@ export class ProductListComponent implements OnInit {
   thePageSize: number = 5;
   theTotalElements: number = 0;
 
-  previousKeyword: string = "";
+  previousKeyword: string = '';
 
   constructor(private productService: ProductService,
+              private cartService: CartService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -43,7 +47,6 @@ export class ProductListComponent implements OnInit {
     }
 
   }
-
 
   handleSearchProducts() {
 
@@ -103,12 +106,6 @@ export class ProductListComponent implements OnInit {
                                                .subscribe(this.processResult());
   }
 
-  updatePageSize(pageSize: string) {
-    this.thePageSize = +pageSize;
-    this.thePageNumber = 1;
-    this.listProducts();
-  }
-
   processResult() {
     return (data: any) => {
       this.products = data._embedded.products;
@@ -117,7 +114,21 @@ export class ProductListComponent implements OnInit {
       this.theTotalElements = data.page.totalElements;
     };
   }
-  addToCart(productTemp: Product) {
-    console.log(`Adding To Cart: ${productTemp.name}, ${productTemp.unitPrice}`);
+
+  updatePageSize(pageSize: number) {
+    this.thePageSize = pageSize;
+    this.thePageNumber = 1;
+    this.listProducts();
   }
+
+  addToCart(theProduct: Product) {
+    
+    console.log(`Adding to cart: ${theProduct.name}, ${theProduct.unitPrice}`);
+
+    // TODO ... do the real work
+    const theCartItem = new CartItem(theProduct);
+
+    this.cartService.addToCart(theCartItem);
+  }
+
 }

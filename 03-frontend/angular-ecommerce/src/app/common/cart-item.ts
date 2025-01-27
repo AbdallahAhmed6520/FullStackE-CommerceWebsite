@@ -1,3 +1,5 @@
+import { Product } from './product';
+
 export class CartItem {
 
     id: string;
@@ -7,11 +9,12 @@ export class CartItem {
 
     quantity: number;
 
-    constructor() {
-        this.id = "";
-        this.name = "";
-        this.imageUrl = "";
-        this.unitPrice = 0;
+    constructor(product: Product) {
+        this.id = product.id ?? '';
+        this.name = product.name ?? '';
+        this.imageUrl = product.imageUrl ?? '';
+        this.unitPrice = product.unitPrice ?? 0;
+
         this.quantity = 1;
     }
 }
