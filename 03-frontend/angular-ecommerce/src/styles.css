@@ -122,9 +122,7 @@ a:hover {
 
 .page-container {
     background: #e5e5e5;
-    padding-left: 200px;
-    padding-bottom: 60px;
-    /* Adjust this value based on your footer's height */
+    padding-left: 200px
 }
 
 .main-content {
@@ -829,20 +827,15 @@ a.primary-btn:hover {
  * ----------------------------
  */
 
-footer {
-    background: #232324;
-    position: fixed;
-    /* Changed from relative to fixed */
-    bottom: 0;
-    /* Added to fix at bottom */
-    width: 100%;
-    /* Added to span full width */
-    text-align: center;
-    z-index: 1;
-}
-
 footer ul li a {
     color: #fff
+}
+
+footer {
+    background: #232324;
+    z-index: 1;
+    position: relative;
+    text-align: center
 }
 
 footer li a {
