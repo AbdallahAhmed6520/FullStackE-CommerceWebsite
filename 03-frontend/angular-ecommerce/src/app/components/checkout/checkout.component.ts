@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { count } from 'rxjs';
 
 @Component({
   selector: 'app-checkout',
@@ -16,6 +17,28 @@ export class CheckoutComponent implements OnInit {
         firstName: [''],
         lastName: [''],
         email: ['']
+      }),
+      shippedAddress: this.formBuilder.group({
+        street: [''],
+        city: [''],
+        state: [''],
+        country: [''],
+        zipCode: ['']
+      }),
+      billingAddress: this.formBuilder.group({
+        street: [''],
+        city: [''],
+        state: [''],
+        country: [''],
+        zipCode: ['']
+      }),
+      creditCard: this.formBuilder.group({
+        cardType: [''],
+        nameOnCard: [''],
+        cardNumber: [''],
+        securityCode: [''],
+        expirationMonth: [''],
+        expirationYear: ['']
       })
     });
   }
