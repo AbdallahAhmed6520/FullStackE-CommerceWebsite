@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { count } from 'rxjs';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-checkout',
@@ -8,7 +7,12 @@ import { count } from 'rxjs';
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
-  checkoutFormGroup!: FormGroup;
+
+  checkoutFormGroup!: FormGroup;  // Using definite assignment assertion
+
+  totalPrice: number = 0;
+  totalQuantity: number = 0;
+
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -18,7 +22,7 @@ export class CheckoutComponent implements OnInit {
         lastName: [''],
         email: ['']
       }),
-      shippedAddress: this.formBuilder.group({
+      shippingAddress: this.formBuilder.group({
         street: [''],
         city: [''],
         state: [''],
@@ -42,9 +46,25 @@ export class CheckoutComponent implements OnInit {
       })
     });
   }
-  onSubmit() {
-    console.log('Handling the submit button');
-    console.log(this.checkoutFormGroup.get('customer')!.value);
-    console.log('The email address is ' + this.checkoutFormGroup.get('customer')!.value.email);
+
+  copyShippingAddressToBillingAddress(event: Event): void {
+    const checkbox = event.target as HTMLInputElement;
+
+    if (checkbox.checked) {
+      this.checkoutFormGroup.get('billingAddress')
+        ?.setValue(this.checkoutFormGroup.get('shippingAddress')?.value);
+    }
+    else {
+      this.checkoutFormGroup.get('billingAddress')?.reset();
+    }
+  }
+
+  onSubmit(): void {
+    console.log("Handling the submit button");
+    const customerForm = this.checkoutFormGroup.get('customer');
+    if (customerForm) {
+      console.log(customerForm.value);
+      console.log("The email address is " + customerForm.value.email);
+    }
   }
 }
