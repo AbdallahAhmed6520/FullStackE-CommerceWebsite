@@ -556,6 +556,16 @@ input.au-input.au-input-xl {
  * ----------------------------
  */
 
+ .items.summary {
+     border: none;
+     padding: 15px;
+ }
+
+ .items.summary p {
+     margin-bottom: 10px;
+     font-weight: bold;
+ }
+
 .product-box img {
     width: 150px;
 }

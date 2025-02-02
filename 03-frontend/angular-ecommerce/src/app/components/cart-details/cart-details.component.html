@@ -44,25 +44,25 @@
 
                                     <div class="col-8"></div>
                                 </div>
-                                
-                                <button (click)="remove(tempCartItem)" class="btn btn-primary btn-sm mt-2">Remove</button>
+                                <button (click)="remove(tempCartItem)"
+                                    class="btn btn-primary btn-sm mt-2">Remove</button>
 
                             </div>
+
 
                             <p class="mt-2">Subtotal: {{ tempCartItem.quantity * tempCartItem.unitPrice | currency:
                                 'USD' }}</p>
                         </td>
                     </tr>
 
-                    <tr>
-                        <td colspan="2"></td>
-                        <td style="font-weight: bold">
-                            <p>Total Quantity: {{ totalQuantity }}</p>
-                            <p>Shipping: FREE</p>
-                            <p>Total Price: {{ totalPrice | currency: 'USD' }}</p>
-                        </td>
-                    </tr>
+                    <td colspan="2"></td>
 
+                    <div class="items summary">
+                        <p>Total Quantity: {{ totalQuantity }}</p>
+                        <p>Shipping: FREE</p>
+                        <p>Total Price: {{ totalPrice | currency: 'USD' }}</p>
+                        <a routerLink="/checkout" class="btn btn-primary">Checkout</a>
+                    </div>
                 </table>
 
             </div>
