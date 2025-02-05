@@ -7,9 +7,6 @@ node_modules/
 /aot
 /.ng
 
-# Environment files (except for template files)
-/src/environments/environment.ts
-/src/environments/environment.prod.ts
 
 # Logs and temporary files
 npm-debug.log*
